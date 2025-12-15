@@ -20,6 +20,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       flake-utils,
       devshell,
@@ -35,7 +36,7 @@
         };
 
         hooks = git-hooks.lib.${system}.run {
-          src = ./.;
+          src = self;
           hooks = import ./githooks.nix { inherit pkgs; };
         };
       in

@@ -1,0 +1,120 @@
+{
+	"folders": [
+    {
+      "name": "💾 REPOS",
+      "path": "."
+    },
+    {
+      "name": "📚 LIBRARY",
+      "path": "nix-lib"
+    },
+    {
+      "name": "📋 CONFIG",
+      "path": "nix-config"
+    },
+    {
+      "name": "🛡️ SECRETS",
+      "path": "nix-secrets"
+    },
+    {
+      "name": "🔑 KEYS",
+      "path": "nix-keys"
+    },
+    {
+      "name": "🧠 MEMORY",
+      "path": "../../.agent-memory"
+    }
+  ],
+	"settings": {
+    "files.exclude": {
+      "**/.decrypted~*": true,
+      "nix-config": true,
+      "nix-lib": true,
+      "nix-keys": true,
+      "nix-secrets": true,
+    },
+    "files.watcherExclude": {
+      "**/.decrypted~*": true,
+      "nix-config": true,
+      "nix-lib": true,
+      "nix-keys": true,
+      "nix-secrets": true,
+    },
+    "search.exclude": {
+      "**/.decrypted~*": true,
+      "nix-config": true,
+      "nix-lib": true,
+      "nix-keys": true,
+      "nix-secrets": true,
+
+    },
+    "git.alwaysSignOff": false,
+    "git.enableCommitSigning": false,
+    "git.detectSubmodules": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.postCommitCommand": "push",
+    "git.rebaseWhenSync": true,
+    "git.allowForcePush": true,
+    "git.allowNoVerifyCommit": true,
+    "git.autoStash": true,
+    "gitlens.advanced.messages": {
+      "suppressCommitHasNoPreviousCommitWarning": true
+    },
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.currentLine.enabled": true,
+    "gitlens.codeLens.enabled": true,
+    "conventionalCommits.autoCommit": false,
+    "conventionalCommits.scopes": [
+      "config",
+      "secrets",
+      "hosts",
+      "modules",
+      "flake"
+    ],
+    "files.associations": {
+      "*.nix": "nix",
+      "*.yaml": "yaml"
+    },
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nixd",
+    "nix.serverSettings": {
+      "nixd": {
+        "formatting": {
+          "command": ["nixfmt"]
+        },
+        "options": {
+          "nixos": {
+            "expr": "(builtins.getFlake \"/home/rona/Repositories/nix-repos/nix-config\").nixosConfigurations.nanoserver.options"
+          },
+          "home-manager": {
+            "expr": "(builtins.getFlake \"/home/rona/Repositories/nix-repos/nix-config\").homeConfigurations.\"rona@nanoserver\".options"
+          }
+        }
+      }
+    },
+    "yaml.schemas": {
+      "https://json.schemastore.org/github-workflow.json": [
+        ".github/workflows/*.yml",
+        ".github/workflows/*.yaml"
+      ]
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "signageos.signageos-vscode-sops",
+      "jnoortheen.nix-ide",
+      "arrterian.nix-env-selector",
+      "mkhl.direnv",
+      "eamodio.gitlens",
+      "github.vscode-github-actions",
+      "github.vscode-pull-request-github",
+      "mhutchie.git-graph",
+      "vivaxy.vscode-conventional-commits",
+      "waderyan.gitblame",
+      "donjayamanne.githistory",
+      "redhat.vscode-yaml"
+    ]
+  }
+}
