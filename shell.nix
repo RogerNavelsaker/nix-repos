@@ -2,6 +2,7 @@
 {
   pkgs,
   hooks,
+  scripts,
 }:
 
 pkgs.devshell.mkShell {
@@ -156,6 +157,24 @@ pkgs.devshell.mkShell {
       name = "show";
       help = "Display flake outputs structure";
       command = "nix flake show";
+    }
+
+    # Cross-repo Operations (orchestrate multiple repos)
+    {
+      category = "cross-repo";
+      name = "iso";
+      help = "ISO management: iso <build|run|stop|restart|status|ssh|log> (--help for details)";
+      command = ''
+        ${scripts.iso}/bin/iso "$@"
+      '';
+    }
+    {
+      category = "cross-repo";
+      name = "deploy-nixos";
+      help = "Deploy NixOS via nixos-anywhere (--help for details)";
+      command = ''
+        ${scripts.nixos-anywhere}/bin/nixos-anywhere "$@"
+      '';
     }
   ];
 
