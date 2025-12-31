@@ -1,4 +1,5 @@
 # shell.nix
+# Central devshell provides: git, fd, rg, bat, eza, jq, nixfmt, deadnix, statix, nix-tree
 {
   pkgs,
   hooks,
@@ -20,19 +21,7 @@ pkgs.devshell.mkShell {
     $(type -p menu &>/dev/null && menu)
   '';
 
-  packages = with pkgs; [
-    # Nix tools
-    nixfmt-rfc-style
-    deadnix
-    statix
-    nix-tree
-
-    # Language servers
-    nixd
-
-    # Version control
-    git
-  ];
+  packages = [ ];
 
   commands = [
     # Navigation Category
@@ -174,6 +163,22 @@ pkgs.devshell.mkShell {
       help = "Deploy NixOS via nixos-anywhere (--help for details)";
       command = ''
         ${scripts.nixos-anywhere}/bin/nixos-anywhere "$@"
+      '';
+    }
+    {
+      category = "cross-repo";
+      name = "deploy-key";
+      help = "Generate deploy keys for CI: deploy-key <generate|show|instructions>";
+      command = ''
+        ${scripts.deploy-key}/bin/deploy-key "$@"
+      '';
+    }
+    {
+      category = "cross-repo";
+      name = "ventoy";
+      help = "Create Ventoy disk with ISO and encrypted pass store: ventoy <create|info>";
+      command = ''
+        ${scripts.ventoy}/bin/ventoy "$@"
       '';
     }
   ];

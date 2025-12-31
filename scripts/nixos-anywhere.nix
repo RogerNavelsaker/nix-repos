@@ -4,8 +4,8 @@
 
 pog.pog {
   name = "nixos-anywhere";
-  version = "1.0.0";
-  description = "Deploy NixOS with host keys and FlakeHub token via nixos-anywhere";
+  version = "1.1.0";
+  description = "Deploy NixOS with host keys via nixos-anywhere";
 
   arguments = [
     {
@@ -111,17 +111,6 @@ pog.pog {
     if [ -f "$keys_repo/public/hosts/$HOST/ssh_host_ed25519_key.pub" ]; then
       cp "$keys_repo/public/hosts/$HOST/ssh_host_ed25519_key.pub" "$TEMP_DIR/etc/ssh/"
       chmod 644 "$TEMP_DIR/etc/ssh/ssh_host_ed25519_key.pub"
-    fi
-
-    # Extract FlakeHub token
-    if pass show "hosts/$HOST/flakehub_token" &>/dev/null; then
-      cyan "Extracting FlakeHub token (requires Yubikey)..."
-      mkdir -p "$TEMP_DIR/nix/var/determinate"
-      pass show "hosts/$HOST/flakehub_token" > "$TEMP_DIR/nix/var/determinate/flakehub-token"
-      chmod 600 "$TEMP_DIR/nix/var/determinate/flakehub-token"
-    else
-      yellow "Warning: No FlakeHub token found for host '$HOST'"
-      yellow "Private flakes will not be accessible during deployment"
     fi
 
     # Extract user keys if specified

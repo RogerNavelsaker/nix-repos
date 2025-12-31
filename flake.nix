@@ -39,6 +39,16 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ devshell.overlays.default ];
+          config = {
+            allowUnfreePredicate =
+              pkg:
+              builtins.elem (nixpkgs.lib.getName pkg) [
+                "ventoy" # Required for Ventoy disk creation scripts
+              ];
+            permittedInsecurePackages = [
+              "ventoy-1.1.07" # Ventoy marked insecure but required for disk creation
+            ];
+          };
         };
 
         hooks = git-hooks.lib.${system}.run {
