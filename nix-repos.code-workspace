@@ -1,7 +1,7 @@
 {
   "folders": [
     {
-      "name": "nix-repos",
+      "name": "@nix-repos",
       "path": "."
     },
     {

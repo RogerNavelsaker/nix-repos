@@ -24,7 +24,7 @@ This repository is the shared workspace entrypoint for the Nix layer: developmen
 
 ## Intended Use
 
-- Clone this repo alongside the other Nix repos into `~/Repositories`
+- Clone this repo as `~/Repositories/@nix-repos` and keep the sibling Nix repos directly under `~/Repositories`
 - Use Flox + `direnv` as the default shell entrypoint
 - Use it as the top-level workspace when working across multiple sibling Nix repositories
 - Keep reusable logic in `nix-lib` and system-specific configuration in `nix-config`
