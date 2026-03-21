@@ -1,5 +1,5 @@
 # shell.nix
-# Central devshell provides: git, fd, rg, bat, eza, jq, nixfmt, deadnix, statix, nix-tree
+# Central devshell provides workspace commands for sibling Nix repos
 {
   pkgs,
   hooks,
@@ -12,7 +12,7 @@ pkgs.devshell.mkShell {
   motd = ''
     {202}📦 Nix Repositories Workspace{reset}
 
-    Nested repositories:
+    Sibling repositories:
       • nix-config   - NixOS system configurations
       • nix-lib      - Shared library for NixOS/Home Manager
       • nix-secrets  - SOPS-encrypted secrets
@@ -30,7 +30,7 @@ pkgs.devshell.mkShell {
       name = "config";
       help = "Enter nix-config devshell";
       command = ''
-        cd nix-config && nix develop
+        cd ../nix-config && nix develop
       '';
     }
     {
@@ -38,7 +38,7 @@ pkgs.devshell.mkShell {
       name = "lib";
       help = "Enter nix-lib directory";
       command = ''
-        cd nix-lib && nix develop
+        cd ../nix-lib && nix develop
       '';
     }
     {
@@ -46,7 +46,7 @@ pkgs.devshell.mkShell {
       name = "secrets";
       help = "Enter nix-secrets devshell";
       command = ''
-        cd nix-secrets && nix develop
+        cd ../nix-secrets && nix develop
       '';
     }
     {
@@ -54,7 +54,7 @@ pkgs.devshell.mkShell {
       name = "keys";
       help = "Enter nix-keys devshell";
       command = ''
-        cd nix-keys && nix develop
+        cd ../nix-keys && nix develop
       '';
     }
 
@@ -62,11 +62,11 @@ pkgs.devshell.mkShell {
     {
       category = "multi-repo";
       name = "status-all";
-      help = "Show git status for all nested repos";
+      help = "Show git status for all sibling repos";
       command = ''
-        for repo in nix-config nix-lib nix-secrets nix-keys; do
+        for repo in ../nix-config ../nix-lib ../nix-secrets ../nix-keys; do
           if [ -d "$repo/.git" ]; then
-            echo -e "\n{202}=== $repo ==={reset}"
+            echo -e "\n{202}=== $(basename "$repo") ==={reset}"
             git -C "$repo" status --short
           fi
         done
@@ -75,11 +75,11 @@ pkgs.devshell.mkShell {
     {
       category = "multi-repo";
       name = "pull-all";
-      help = "Pull latest changes for all nested repos";
+      help = "Pull latest changes for all sibling repos";
       command = ''
-        for repo in nix-config nix-lib nix-secrets nix-keys; do
+        for repo in ../nix-config ../nix-lib ../nix-secrets ../nix-keys; do
           if [ -d "$repo/.git" ]; then
-            echo -e "\n{202}=== Pulling $repo ==={reset}"
+            echo -e "\n{202}=== Pulling $(basename "$repo") ==={reset}"
             git -C "$repo" pull --rebase
           fi
         done
@@ -88,13 +88,13 @@ pkgs.devshell.mkShell {
     {
       category = "multi-repo";
       name = "push-all";
-      help = "Push all nested repos with changes";
+      help = "Push all sibling repos with changes";
       command = ''
-        for repo in nix-config nix-lib nix-secrets nix-keys; do
+        for repo in ../nix-config ../nix-lib ../nix-secrets ../nix-keys; do
           if [ -d "$repo/.git" ]; then
             ahead=$(git -C "$repo" rev-list --count @{upstream}..HEAD 2>/dev/null || echo 0)
             if [ "$ahead" -gt 0 ]; then
-              echo -e "\n{202}=== Pushing $repo ($ahead commits ahead) ==={reset}"
+              echo -e "\n{202}=== Pushing $(basename "$repo") ($ahead commits ahead) ==={reset}"
               git -C "$repo" push
             fi
           fi
@@ -104,11 +104,11 @@ pkgs.devshell.mkShell {
     {
       category = "multi-repo";
       name = "update-all";
-      help = "Update flake inputs for all nested repos";
+      help = "Update flake inputs for all sibling repos";
       command = ''
-        for repo in nix-config nix-lib nix-secrets nix-keys; do
+        for repo in ../nix-config ../nix-lib ../nix-secrets ../nix-keys; do
           if [ -f "$repo/flake.nix" ]; then
-            echo -e "\n{202}=== Updating $repo ==={reset}"
+            echo -e "\n{202}=== Updating $(basename "$repo") ==={reset}"
             nix flake update --flake "$repo"
           fi
         done
@@ -125,11 +125,11 @@ pkgs.devshell.mkShell {
     {
       category = "validation";
       name = "check-all";
-      help = "Run flake checks for all nested repos";
+      help = "Run flake checks for all sibling repos";
       command = ''
-        for repo in nix-config nix-lib nix-secrets nix-keys; do
+        for repo in ../nix-config ../nix-lib ../nix-secrets ../nix-keys; do
           if [ -f "$repo/flake.nix" ]; then
-            echo -e "\n{202}=== Checking $repo ==={reset}"
+            echo -e "\n{202}=== Checking $(basename "$repo") ==={reset}"
             nix flake check "$repo" || true
           fi
         done

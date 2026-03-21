@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd -- "$script_dir/.." && pwd)"
+workspace_root="${SHARED_WORKSPACE_ROOT:-$(dirname "$repo_root")}"
+
+repos=(
+  nix-config
+  nix-lib
+  nix-secrets
+  nix-keys
+)
+
+for repo in "${repos[@]}"; do
+  target="$workspace_root/$repo"
+  echo "== $repo =="
+  if [ ! -d "$target/.git" ]; then
+    echo "missing"
+    continue
+  fi
+
+  git -C "$target" status --short --branch
+done

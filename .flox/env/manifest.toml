@@ -1,0 +1,36 @@
+schema-version = "1.10.0"
+
+[install]
+git.pkg-path = "git"
+gh.pkg-path = "gh"
+direnv.pkg-path = "direnv"
+jq.pkg-path = "jq"
+ripgrep.pkg-path = "ripgrep"
+fd.pkg-path = "fd"
+bat.pkg-path = "bat"
+eza.pkg-path = "eza"
+nix.pkg-path = "nix"
+nixd.pkg-path = "nixd"
+nixfmt-rfc-style.pkg-path = "nixfmt-rfc-style"
+deadnix.pkg-path = "deadnix"
+statix.pkg-path = "statix"
+nix-tree.pkg-path = "nix-tree"
+
+[vars]
+WORKSPACE_OWNER = "RogerNavelsaker"
+WORKSPACE_META = "nix-repos"
+
+[hook]
+on-activate = '''
+  export META_REPO_ROOT="$FLOX_ENV_PROJECT"
+  export SHARED_WORKSPACE_ROOT="$(dirname "$FLOX_ENV_PROJECT")"
+'''
+
+[profile]
+common = """
+  alias workspace-bootstrap="$META_REPO_ROOT/scripts/bootstrap"
+  alias workspace-status="$META_REPO_ROOT/scripts/status"
+"""
+
+[options]
+systems = ["x86_64-linux"]

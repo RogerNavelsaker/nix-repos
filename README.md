@@ -2,7 +2,7 @@
 
 Meta-project for the Nix-focused repositories under `RogerNavelsaker/*`.
 
-This repository is the workspace-level entrypoint for the Nix layer: development shell, shared hooks, and helper scripts that support the rest of the Nix repos. It complements, rather than replaces, the individual repositories listed below.
+This repository is the shared workspace entrypoint for the Nix layer: development shell, Flox environment, shared hooks, workspace file, and helper scripts that support the rest of the Nix repos. It complements, rather than replaces, the individual repositories listed below.
 
 ## Repositories
 
@@ -16,6 +16,7 @@ This repository is the workspace-level entrypoint for the Nix layer: development
 
 ## What Lives Here
 
+- `.flox/env/manifest.toml` and `.envrc` for the preferred Flox + `direnv` shell
 - `flake.nix` and `shell.nix` for the shared workspace environment
 - `githooks.nix` for repo-wide checks
 - `scripts/` for deployment and system utility tasks
@@ -24,8 +25,12 @@ This repository is the workspace-level entrypoint for the Nix layer: development
 ## Intended Use
 
 - Clone this repo alongside the other Nix repos into `~/Repositories`
-- Use it as the top-level workspace when working across multiple Nix repositories
+- Use Flox + `direnv` as the default shell entrypoint
+- Use it as the top-level workspace when working across multiple sibling Nix repositories
 - Keep reusable logic in `nix-lib` and system-specific configuration in `nix-config`
+- Bootstrap missing sibling repos with `./scripts/bootstrap`
+- Inspect workspace state with `./scripts/status`
+- Submodules are intentionally not used
 
 ## Related Meta Projects
 

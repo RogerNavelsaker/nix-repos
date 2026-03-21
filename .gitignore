@@ -2,12 +2,6 @@
 result
 result-*
 
-# Nested git repos (managed separately)
-nix-config/
-nix-lib/
-nix-secrets/
-nix-keys/
-
 # direnv
 .direnv/
 

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+owner="${WORKSPACE_OWNER:-RogerNavelsaker}"
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd -- "$script_dir/.." && pwd)"
+workspace_root="${SHARED_WORKSPACE_ROOT:-$(dirname "$repo_root")}"
+
+required_repos=(
+  nix-config
+  nix-lib
+)
+
+optional_repos=(
+  nix-secrets
+  nix-keys
+)
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "gh is required for bootstrap" >&2
+  exit 1
+fi
+
+for repo in "${required_repos[@]}"; do
+  target="$workspace_root/$repo"
+  if [ -d "$target/.git" ]; then
+    echo "present: $repo"
+    continue
+  fi
+
+  echo "cloning: $owner/$repo -> $target"
+  gh repo clone "$owner/$repo" "$target"
+done
+
+for repo in "${optional_repos[@]}"; do
+  target="$workspace_root/$repo"
+  if [ -d "$target/.git" ]; then
+    echo "present: $repo"
+    continue
+  fi
+
+  echo "optional: attempting $owner/$repo"
+  if ! gh repo clone "$owner/$repo" "$target"; then
+    echo "skipped: $repo (private or inaccessible)"
+  fi
+done
+
+echo
+echo "workspace ready at $workspace_root"
