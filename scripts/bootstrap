@@ -9,9 +9,6 @@ workspace_root="${SHARED_WORKSPACE_ROOT:-$(dirname "$repo_root")}"
 required_repos=(
   nix-config
   nix-lib
-)
-
-optional_repos=(
   nix-secrets
   nix-keys
 )
@@ -30,19 +27,6 @@ for repo in "${required_repos[@]}"; do
 
   echo "cloning: $owner/$repo -> $target"
   gh repo clone "$owner/$repo" "$target"
-done
-
-for repo in "${optional_repos[@]}"; do
-  target="$workspace_root/$repo"
-  if [ -d "$target/.git" ]; then
-    echo "present: $repo"
-    continue
-  fi
-
-  echo "optional: attempting $owner/$repo"
-  if ! gh repo clone "$owner/$repo" "$target"; then
-    echo "skipped: $repo (private or inaccessible)"
-  fi
 done
 
 echo

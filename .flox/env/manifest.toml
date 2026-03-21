@@ -28,8 +28,21 @@ on-activate = '''
 
 [profile]
 common = """
+  config() { cd "$SHARED_WORKSPACE_ROOT/nix-config"; }
+  lib() { cd "$SHARED_WORKSPACE_ROOT/nix-lib"; }
+  secrets() { cd "$SHARED_WORKSPACE_ROOT/nix-secrets"; }
+  keys() { cd "$SHARED_WORKSPACE_ROOT/nix-keys"; }
+
   alias workspace-bootstrap="$META_REPO_ROOT/scripts/bootstrap"
   alias workspace-status="$META_REPO_ROOT/scripts/status"
+  alias status-all="$META_REPO_ROOT/scripts/status"
+  alias pull-all="$META_REPO_ROOT/scripts/pull-all"
+  alias push-all="$META_REPO_ROOT/scripts/push-all"
+  alias update-all="$META_REPO_ROOT/scripts/update-all"
+  alias check-all="$META_REPO_ROOT/scripts/check-all"
+  alias check='nix flake check --no-build'
+  alias fmt='nixfmt .'
+  alias show='nix flake show'
 """
 
 [options]

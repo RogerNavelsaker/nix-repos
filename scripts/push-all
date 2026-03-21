@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "$script_dir/_workspace.sh"
+
+push_repo() {
+  local repo="$1"
+  local target="$2"
+  local ahead
+
+  echo "== $repo =="
+  if [ ! -d "$target/.git" ]; then
+    echo "missing"
+    return
+  fi
+
+  ahead=$(git -C "$target" rev-list --count @{upstream}..HEAD 2>/dev/null || echo 0)
+  if [ "$ahead" -eq 0 ]; then
+    echo "up-to-date"
+    return
+  fi
+
+  echo "pushing $ahead commit(s)"
+  git -C "$target" push
+}
+
+for_each_repo push_repo
