@@ -24,13 +24,13 @@ This repository is the shared workspace entrypoint for the Nix layer: developmen
 
 ## Intended Use
 
-- Clone this repo as `~/Repositories/@nix-repos` and keep the sibling Nix repos directly under `~/Repositories`
+- Clone this repo as `~/Repositories/@nix-repos` and keep the underlying repos as ignored child directories inside `@nix-repos/`
 - Use Flox + `direnv` as the default shell entrypoint
 - Use Flox for navigation, workspace status, update, and validation commands
 - Keep `shell.nix` only for the Nix-built deployment helpers
-- Use it as the top-level workspace when working across multiple sibling Nix repositories
+- Use it as the top-level workspace when working across multiple nested Nix repositories
 - Keep reusable logic in `nix-lib` and system-specific configuration in `nix-config`
-- Bootstrap missing sibling repos with `./scripts/bootstrap`
+- Bootstrap missing child repos with `./scripts/bootstrap`
 - Inspect workspace state with `./scripts/status` or `status-all`
 - Submodules are intentionally not used
 

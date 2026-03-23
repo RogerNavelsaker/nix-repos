@@ -12,3 +12,7 @@ result-*
 
 # Claude
 .claude/
+nix-config/
+nix-lib/
+nix-secrets/
+nix-keys/

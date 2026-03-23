@@ -51,7 +51,7 @@
       "WORKSPACE_OWNER": "RogerNavelsaker"
     },
     "hook": {
-      "on-activate": "  export META_REPO_ROOT=\"$FLOX_ENV_PROJECT\"\n  export SHARED_WORKSPACE_ROOT=\"$(dirname \"$FLOX_ENV_PROJECT\")\"\n"
+      "on-activate": "  export META_REPO_ROOT=\"$FLOX_ENV_PROJECT\"\n  export SHARED_WORKSPACE_ROOT=\"$FLOX_ENV_PROJECT\"\n"
     },
     "profile": {
       "common": "  config() { cd \"$SHARED_WORKSPACE_ROOT/nix-config\"; }\n  lib() { cd \"$SHARED_WORKSPACE_ROOT/nix-lib\"; }\n  secrets() { cd \"$SHARED_WORKSPACE_ROOT/nix-secrets\"; }\n  keys() { cd \"$SHARED_WORKSPACE_ROOT/nix-keys\"; }\n\n  alias workspace-bootstrap=\"$META_REPO_ROOT/scripts/bootstrap\"\n  alias workspace-status=\"$META_REPO_ROOT/scripts/status\"\n  alias status-all=\"$META_REPO_ROOT/scripts/status\"\n  alias pull-all=\"$META_REPO_ROOT/scripts/pull-all\"\n  alias push-all=\"$META_REPO_ROOT/scripts/push-all\"\n  alias update-all=\"$META_REPO_ROOT/scripts/update-all\"\n  alias check-all=\"$META_REPO_ROOT/scripts/check-all\"\n  alias check='nix flake check --no-build'\n  alias fmt='nixfmt .'\n  alias show='nix flake show'\n"

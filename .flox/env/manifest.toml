@@ -23,7 +23,7 @@ WORKSPACE_META = "nix-repos"
 [hook]
 on-activate = '''
   export META_REPO_ROOT="$FLOX_ENV_PROJECT"
-  export SHARED_WORKSPACE_ROOT="$(dirname "$FLOX_ENV_PROJECT")"
+  export SHARED_WORKSPACE_ROOT="$FLOX_ENV_PROJECT"
 '''
 
 [profile]
