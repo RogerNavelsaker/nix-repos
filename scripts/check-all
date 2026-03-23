@@ -15,7 +15,7 @@ check_repo() {
     return
   fi
 
-  nix flake check "$target" --no-build || true
+  nix flake check "$target" --no-build --option eval-cache false || true
 }
 
 for_each_repo check_repo
