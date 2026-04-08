@@ -36,5 +36,5 @@ This repository is the shared workspace entrypoint for the Nix layer: developmen
 
 ## Related Meta Projects
 
-- [agent-clis](https://github.com/RogerNavelsaker/agent-clis) for packaged CLI wrappers
+- [nixpkgs](https://github.com/RogerNavelsaker/nixpkgs) for packaged CLI wrappers
 - [runtime-intel](https://github.com/RogerNavelsaker/runtime-intel) for code intelligence and runtime integration tooling
