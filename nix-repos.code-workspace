@@ -1,62 +1,18 @@
 {
   "folders": [
     {
-      "name": "@nix-repos",
+      "name": "nix-repos",
       "path": "."
-    },
-    {
-      "name": "nix-config",
-      "path": "./nix-config"
-    },
-    {
-      "name": "nix-lib",
-      "path": "./nix-lib"
-    },
-    {
-      "name": "nix-secrets",
-      "path": "./nix-secrets"
-    },
-    {
-      "name": "nix-keys",
-      "path": "./nix-keys"
     }
   ],
   "settings": {
-    "files.exclude": {
-      "**/.decrypted~*": true,
-      "**/.direnv": true,
-      "**/.flox": true,
-      "**/result": true,
-      "**/result-*": true
-    },
-    "files.watcherExclude": {
-      "**/.decrypted~*": true,
-      "**/.direnv/**": true,
-      "**/.flox/**": true
-    },
-    "search.exclude": {
-      "**/.decrypted~*": true,
-      "**/.direnv": true,
-      "**/.flox": true
-    },
-    "git.detectSubmodules": false,
-    "nix.enableLanguageServer": true,
-    "nix.serverPath": "nixd",
-    "yaml.schemas": {
-      "https://json.schemastore.org/github-workflow.json": [
-        ".github/workflows/*.yml",
-        ".github/workflows/*.yaml"
-      ]
-    }
+    "git.detectSubmodules": false
   },
   "extensions": {
     "recommendations": [
-      "jnoortheen.nix-ide",
-      "arrterian.nix-env-selector",
       "mkhl.direnv",
       "github.vscode-github-actions",
-      "github.vscode-pull-request-github",
-      "redhat.vscode-yaml"
+      "github.vscode-pull-request-github"
     ]
   }
 }

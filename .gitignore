@@ -1,18 +1,5 @@
-# Nix build results
-result
-result-*
-
-# direnv
-.direnv/
-
-# Editor
-.vscode/
-*.swp
-*~
-
-# Claude
-.claude/
-nix-config/
-nix-lib/
-nix-secrets/
-nix-keys/
+/nix-repos
+/nix-config
+/nix-lib
+/nix-secrets
+/nix-keys
