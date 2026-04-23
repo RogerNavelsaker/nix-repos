@@ -1,0 +1,11 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "schema-version": "1.10.0",
+    "hook": {
+      "on-activate": "  # Guard: Only run in the physical meta-repo directory\n  if [ \"$(pwd -P)\" != \"/home/rona/Repositories/RogerNavelsaker/nix-repos\" ]; then\n    return\n  fi\n\n  # Symlink nix repos\n  for r in ../nix-config ../nix-lib ../nix-secrets ../nix-keys; do\n    if [ -d \"$r\" ] && [ \"$(basename \"$r\")\" != \"nix-repos\" ]; then\n      ln -snf \"$r\" .\n    fi\n  done\n"
+    },
+    "options": {}
+  },
+  "packages": []
+}
