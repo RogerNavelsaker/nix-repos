@@ -18,7 +18,7 @@ pkgs.devshell.mkShell {
       • nix-secrets  - SOPS-encrypted secrets
       • nix-keys     - SSH key management tools
 
-    Flox + direnv owns navigation, status, update, and validation commands.
+    The shared workspace devenv provides common CLI tools.
     This fallback shell keeps only the Nix-built deployment helpers.
 
     $(type -p menu &>/dev/null && menu)

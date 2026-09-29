@@ -2,7 +2,7 @@
 
 Meta-project for the Nix-focused repositories under `RogerNavelsaker/*`.
 
-This repository is the shared workspace entrypoint for the Nix layer: development shell, Flox environment, shared hooks, workspace file, and helper scripts that support the rest of the Nix repos. It complements, rather than replaces, the individual repositories listed below.
+This repository is the shared workspace entrypoint for the Nix layer: shared hooks, workspace file, and helper scripts that support the rest of the Nix repos. The pinned workspace devenv is defined at `~/Repositories`; it complements, rather than replaces, the individual repositories listed below.
 
 ## Repositories
 
@@ -16,8 +16,8 @@ This repository is the shared workspace entrypoint for the Nix layer: developmen
 
 ## What Lives Here
 
-- `.flox/env/manifest.toml` and `.envrc` for the preferred Flox + `direnv` shell
-- `flake.nix` and `shell.nix` for the fallback Nix-built environment
+- `.envrc` for shared workspace variables and inherited devenv activation
+- `flake.nix` and `shell.nix` for repo-specific Nix deployment helpers
 - `githooks.nix` for repo-wide checks
 - `scripts/` for deployment and system utility tasks
 - `nix-repos.code-workspace` for the multi-repo editor workspace
@@ -25,8 +25,9 @@ This repository is the shared workspace entrypoint for the Nix layer: developmen
 ## Intended Use
 
 - Clone this repo as `~/Repositories/@nix-repos` and keep the underlying repos as ignored child directories inside `@nix-repos/`
-- Use Flox + `direnv` as the default shell entrypoint
-- Use Flox for navigation, workspace status, update, and validation commands
+- Use the pinned workspace devenv via `direnv` for shared CLI tools
+- Use `nix develop` for the repo-specific Nix deployment helpers
+- Use `~/Repositories/scripts/setup-workspace-links nix-repos` to create missing child-repository links
 - Keep `shell.nix` only for the Nix-built deployment helpers
 - Use it as the top-level workspace when working across multiple nested Nix repositories
 - Keep reusable logic in `nix-lib` and system-specific configuration in `nix-config`
