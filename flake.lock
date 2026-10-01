@@ -135,7 +135,7 @@
         "repo": "default",
         "type": "github"
       }
-    },
+    }
   },
   "root": "root",
   "version": 7
