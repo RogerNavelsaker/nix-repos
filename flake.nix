@@ -57,6 +57,10 @@
 
         formatter = pkgs.nixfmt-rfc-style;
 
+        packages.default = import ./shell.nix {
+          inherit pkgs hooks;
+        };
+
         devShells.default = import ./shell.nix {
           inherit pkgs hooks;
         };
