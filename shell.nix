@@ -3,7 +3,6 @@
 {
   pkgs,
   hooks,
-  scripts,
 }:
 
 pkgs.devshell.mkShell {
@@ -26,41 +25,7 @@ pkgs.devshell.mkShell {
 
   packages = [ ];
 
-  commands = [
-    # Cross-repo Operations (orchestrate multiple repos)
-    {
-      category = "cross-repo";
-      name = "iso";
-      help = "ISO management: iso <build|run|stop|restart|status|ssh|log> (--help for details)";
-      command = ''
-        ${scripts.iso}/bin/iso "$@"
-      '';
-    }
-    {
-      category = "cross-repo";
-      name = "deploy-nixos";
-      help = "Deploy NixOS via nixos-anywhere (--help for details)";
-      command = ''
-        ${scripts.nixos-anywhere}/bin/nixos-anywhere "$@"
-      '';
-    }
-    {
-      category = "cross-repo";
-      name = "deploy-key";
-      help = "Generate deploy keys for CI: deploy-key <generate|show|instructions>";
-      command = ''
-        ${scripts.deploy-key}/bin/deploy-key "$@"
-      '';
-    }
-    {
-      category = "cross-repo";
-      name = "ventoy";
-      help = "Create Ventoy disk with ISO and encrypted pass store: ventoy <create|info>";
-      command = ''
-        ${scripts.ventoy}/bin/ventoy "$@"
-      '';
-    }
-  ];
+  commands = [ ];
 
   devshell.startup = {
     git-hooks.text = hooks.shellHook;

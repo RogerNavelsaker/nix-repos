@@ -17,10 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pog = {
-      url = "github:jpetrucciani/pog";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -30,7 +26,6 @@
       flake-utils,
       devshell,
       git-hooks,
-      pog,
       ...
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -56,18 +51,18 @@
           hooks = import ./githooks.nix { inherit pkgs; };
         };
 
-        scripts = import ./scripts {
-          inherit pkgs;
-          inherit (pog.packages.${system}) pog;
-        };
       in
       {
         checks.pre-commit = hooks;
 
         formatter = pkgs.nixfmt-rfc-style;
 
+        packages.default = import ./shell.nix {
+          inherit pkgs hooks;
+        };
+
         devShells.default = import ./shell.nix {
-          inherit pkgs hooks scripts;
+          inherit pkgs hooks;
         };
       }
     );
